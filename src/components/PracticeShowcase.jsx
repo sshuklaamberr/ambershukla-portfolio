@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import gfg from "../assets/social/gfg.svg";
-import leetcodeVideo from "../assets/social/leetcode.mp4";
 
 export const PracticeShowcase = () => {
   return (
@@ -30,9 +29,7 @@ export const PracticeShowcase = () => {
           transition={{ duration: 0.45 }}
           className="text-2xl md:text-3xl font-medium mb-6 text-white"
         >
-          <span className="text-indigo-400">
-            DSA-Focused Practice
-          </span>
+          <span className="text-indigo-400">DSA-Focused Practice</span>
         </motion.h2>
 
         {/* Supporting text */}
@@ -71,11 +68,12 @@ export const PracticeShowcase = () => {
           >
             <div className="flex items-center gap-3 mb-4">
               <video
-                src={leetcodeVideo}
+                src="/social/leetcode.mp4"
                 autoPlay
                 loop
                 muted
                 playsInline
+                preload="auto"
                 className="w-8 h-8 rounded-sm object-cover"
               />
               <h3 className="text-sm font-semibold text-white">
@@ -113,11 +111,7 @@ export const PracticeShowcase = () => {
             "
           >
             <div className="flex items-center gap-3 mb-4">
-              <img
-                src={gfg}
-                alt="GeeksforGeeks"
-                className="w-8 h-8"
-              />
+              <img src={gfg} alt="GeeksforGeeks" className="w-8 h-8" />
               <h3 className="text-sm font-semibold text-white">
                 GeeksforGeeks
               </h3>
