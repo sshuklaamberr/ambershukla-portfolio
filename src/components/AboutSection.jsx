@@ -1,117 +1,136 @@
-import { Briefcase, Code, User } from "lucide-react";
 import { motion } from "framer-motion";
 
 export const AboutSection = () => {
-  const paragraphs = [
-    "Hey, I’m Amber Shukla — a B.Tech CSE student at SRM University and an aspiring Software Engineer. I love building web applications that are efficient, scalable, and impactful.",
-    "Skilled in C, C++, Java, JavaScript with a strong grasp of Data Structures & Algorithms. Passionate about full-stack web development, open-source contributions, and creating seamless user experiences.",
-  ];
-
   return (
-    <section id="about" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-5xl">
-        {/* Section Heading */}
+    <section
+      id="about"
+      className="relative py-24 bg-black overflow-hidden scroll-mt-[90px]"
+    >
+      {/* Subtle grid */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="
+            absolute inset-0
+            bg-[linear-gradient(to_right,rgba(99,102,241,0.03)_1px,transparent_1px),
+                linear-gradient(to_bottom,rgba(99,102,241,0.03)_1px,transparent_1px)]
+            bg-[size:56px_56px]
+          "
+        />
+      </div>
+
+      <div className="relative container mx-auto max-w-6xl px-6">
+
+        {/* Heading */}
         <motion.h2
-          className="text-3xl md:text-4xl font-bold mb-12 text-center"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.45 }}
+          className="text-2xl md:text-3xl font-medium mb-12 text-center text-white"
         >
-          About <span className="text-primary"> Me</span>
+          About <span className="text-indigo-400">Me</span>
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Text */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+
+          {/* LEFT */}
           <motion.div
-            className="space-y-6"
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            variants={{
-              visible: { transition: { staggerChildren: 0.3 } },
-            }}
+            transition={{ duration: 0.55 }}
+            className="space-y-6 text-gray-300"
           >
-            <h3 className="text-2xl font-semibold">
-              Passionate Software Developer & Problem Solver
-            </h3>
+            {/* Highlight line */}
+            <p className="text-base md:text-lg leading-relaxed">
+              I’m <span className="text-white font-medium">Amber Shukla</span>, a
+              B.Tech Computer Science student at SRM University focused on
+              building strong problem-solving and software fundamentals.
+            </p>
 
-            {paragraphs.map((text, idx) => (
-              <motion.p
-                key={idx}
-                className="text-muted-foreground"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.6 }}
-              >
-                {text.split(" ").map((word, i) =>
-                  i === 0 ? (
-                    <span key={i} className="font-semibold text-primary">
-                      {word + " "}
-                    </span>
-                  ) : (
-                    word + " "
-                  )
-                )}
-              </motion.p>
-            ))}
+            {/* Short bullets instead of long paragraph */}
+            <ul className="space-y-2 text-sm md:text-base">
+              <li>
+                • Strong focus on{" "}
+                <span className="text-white">
+                  C++, Java, and Data Structures & Algorithms
+                </span>
+              </li>
+              <li>
+                • Emphasis on writing optimized, readable solutions and
+                understanding time–space trade-offs
+              </li>
+              <li>
+                • Applying CS fundamentals through real-world web projects
+              </li>
+            </ul>
 
-            {/* Only Get In Touch button */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 pt-4 justify-center sm:justify-start"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              <motion.a
+            {/* CTA */}
+            <div className="pt-4">
+              <a
                 href="#contact"
-                whileHover={{ scale: 1.05 }}
-                className="cosmic-button px-6 py-3 rounded-full text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300"
+                className="
+                  inline-block px-6 py-2.5 rounded-full
+                  bg-indigo-600 text-white text-sm font-medium
+                  hover:bg-indigo-700 transition
+                "
               >
-                Get In Touch
-              </motion.a>
-            </motion.div>
+                Open to Internships
+              </a>
+            </div>
           </motion.div>
 
-          {/* Right Column - Cards */}
-          <div className="grid grid-cols-1 gap-6">
+          {/* RIGHT — Cleaner, more visual blocks */}
+          <div className="space-y-5">
+
             {[
               {
-                icon: <Code className="h-6 w-6 text-primary" />,
-                title: "Web Development",
-                desc: "Building responsive, user-friendly websites and applications using React, Tailwind CSS, and modern frameworks.",
+                title: "Core CS",
+                points: [
+                  "C++ & Java",
+                  "Data Structures & Algorithms",
+                  "Problem Solving",
+                ],
               },
               {
-                icon: <User className="h-6 w-6 text-primary" />,
-                title: "Problem Solving",
-                desc: "Solving complex challenges using algorithms and logical reasoning to write efficient and optimized code.",
+                title: "Development",
+                points: [
+                  "React & JavaScript",
+                  "Tailwind CSS",
+                  "Backend Fundamentals",
+                ],
               },
               {
-                icon: <Briefcase className="h-6 w-6 text-primary" />,
-                title: "Project Management",
-                desc: "Handling complete development lifecycles, from planning and coding to deployment, while ensuring code quality and teamwork.",
+                title: "Preparation",
+                points: [
+                  "Clean Code Practices",
+                  "Git & GitHub",
+                  "Interview-Oriented Learning",
+                ],
               },
-            ].map((card, idx) => (
+            ].map((block, i) => (
               <motion.div
-                key={idx}
-                className="gradient-border p-6 rounded-lg hover:shadow-lg transition-shadow duration-300 cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
+                key={block.title}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 * idx }}
+                transition={{ duration: 0.45, delay: i * 0.1 }}
+                className="
+                  bg-white/5 border border-white/10
+                  rounded-xl p-5
+                "
               >
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-full bg-primary/10">{card.icon}</div>
-                  <div className="text-left">
-                    <h4 className="font-semibold text-lg">{card.title}</h4>
-                    <p className="text-muted-foreground">{card.desc}</p>
-                  </div>
-                </div>
+                <h4 className="text-sm font-semibold text-indigo-400 mb-3">
+                  {block.title}
+                </h4>
+                <ul className="space-y-1.5 text-sm text-gray-300">
+                  {block.points.map((p) => (
+                    <li key={p}>• {p}</li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
+
           </div>
         </div>
       </div>
