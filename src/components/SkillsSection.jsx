@@ -1,79 +1,115 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const skills = [
-  // Programming Languages
-  { name: "C", category: "languages" },
-  { name: "C++", category: "languages" },
-  { name: "Java", category: "languages" },
-  { name: "Python", category: "languages" },
+  { name: "C++", category: "core" },
+  { name: "Data Structures & Algorithms", category: "core" },
+  { name: "Java", category: "core" },
 
-  // Frontend
-  { name: "HTML", category: "frontend" },
-  { name: "CSS", category: "frontend" },
-  { name: "Tailwind CSS", category: "frontend" },
-  { name: "JavaScript", category: "frontend" },
-  { name: "React", category: "frontend" },
-
-  // Backend
-  { name: "Node.js", category: "backend" },
-  { name: "Express.js", category: "backend" },
-  { name: "MongoDB", category: "backend" },
-  { name: "SQL", category: "backend" },
-
-  // Tools & Other
-  { name: "Git / GitHub", category: "tools" },
-  { name: "VS Code", category: "tools" },
-  { name: "Figma", category: "tools" },
-  { name: "Data Structures & Algorithms", category: "tools" },
+  { name: "JavaScript", category: "tech" },
+  { name: "React", category: "tech" },
+  { name: "Tailwind CSS", category: "tech" },
+  { name: "Node.js", category: "tech" },
+  { name: "Express.js", category: "tech" },
+  { name: "MongoDB", category: "tech" },
+  { name: "Git & GitHub", category: "tech" },
 ];
 
-const categories = ["all", "languages", "frontend", "backend", "tools"];
+const categories = ["core", "tech"];
+const GRID_SIZE = 8;
+
+const flipVariants = {
+  initial: { rotateY: 80, opacity: 0 },
+  animate: {
+    rotateY: 0,
+    opacity: 1,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
+  exit: {
+    rotateY: -80,
+    opacity: 0,
+    transition: { duration: 0.4, ease: "easeIn" },
+  },
+};
 
 export const SkillsSection = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("core");
 
-  const filteredSkills = skills.filter(
-    (skill) => activeCategory === "all" || skill.category === activeCategory
+  const visibleSkills = skills.filter(
+    (s) => s.category === activeCategory
   );
 
+  const paddedSkills = [
+    ...visibleSkills,
+    ...Array(GRID_SIZE - visibleSkills.length).fill(null),
+  ];
+
   return (
-    <section id="skills" className="py-24 px-4 relative bg-secondary/30">
-      <div className="container mx-auto max-w-5xl">
+    <section
+      id="skills"
+      className="relative py-24 bg-black overflow-hidden scroll-mt-[90px]"
+    >
+      <div className="container mx-auto max-w-5xl px-6">
+
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          My <span className="text-primary">Skills</span>
+        <h2 className="text-2xl md:text-3xl font-medium mb-12 text-center text-white">
+          Technical <span className="text-indigo-400">Skills</span>
         </h2>
 
-        {/* Category Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category, key) => (
+        {/* Toggle */}
+        <div className="flex justify-center gap-4 mb-14">
+          {categories.map((c) => (
             <button
-              key={key}
-              onClick={() => setActiveCategory(category)}
+              key={c}
+              onClick={() => setActiveCategory(c)}
               className={cn(
-                "px-5 py-2 rounded-full transition-colors duration-300 capitalize",
-                activeCategory === category
-                  ? "bg-primary text-white"
-                  : "bg-secondary/70 text-foreground hover:bg-secondary"
+                "px-6 py-2 min-w-[120px] rounded-full text-sm font-medium border transition",
+                activeCategory === c
+                  ? "bg-indigo-600 text-white border-indigo-500 shadow-[0_0_18px_rgba(99,102,241,0.45)]"
+                  : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"
               )}
             >
-              {category}
+              {c === "core" ? "Core CS" : "Tech Stack"}
             </button>
           ))}
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredSkills.map((skill, key) => (
-            <div
-              key={key}
-              className="bg-card p-5 rounded-xl shadow-md hover:-translate-y-2 transition-transform duration-300 flex items-center justify-center text-center border border-gray-200 dark:border-gray-700"
+        {/* Stable Grid */}
+        <div className="perspective-[1200px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              variants={flipVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              style={{ transformStyle: "preserve-3d" }}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-6"
             >
-              <h3 className="font-semibold text-lg text-primary">{skill.name}</h3>
-            </div>
-          ))}
+              {paddedSkills.map((skill, i) =>
+                skill ? (
+                  <div
+                    key={skill.name}
+                    className={cn(
+                      "p-6 rounded-xl border text-center transition hover:-translate-y-2",
+                      skill.category === "core"
+                        ? "bg-indigo-500/10 border-indigo-400/40 shadow-[0_0_30px_rgba(99,102,241,0.35)]"
+                        : "bg-white/5 border-white/10 shadow-[0_0_18px_rgba(255,255,255,0.15)]"
+                    )}
+                  >
+                    <h3 className="text-sm font-semibold text-white">
+                      {skill.name}
+                    </h3>
+                  </div>
+                ) : (
+                  <div key={i} className="opacity-0 pointer-events-none" />
+                )
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
+
       </div>
     </section>
   );
