@@ -9,7 +9,7 @@ const projects = [
     image: "/projects/portfolio.png",
     tags: ["React", "Tailwind CSS", "Framer Motion"],
     live: "https://ambershukla-portfolio.vercel.app",
-    github: "https://github.com/sshuklaamberr/amber-portfolio",
+    github: "https://github.com/sshuklaamberr/ambershukla-portfolio",
   },
   {
     title: "Placement Management System",
