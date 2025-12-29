@@ -1,150 +1,95 @@
-import { motion, AnimatePresence } from "framer-motion";
-import amberPhoto from "../assets/amber.jpeg"; // ✅ Make sure image exists
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import heroVideo from "../assets/hero/bg.mp4";
+import amberPhoto from "../assets/amber.jpeg";
 
 export const HeroSection = () => {
   return (
     <section
-      id="hero"
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-16 overflow-hidden"
+      id="home"
+      className="relative min-h-screen flex items-center overflow-hidden"
     >
-      {/* Left Side - Animated Photo with Glow */}
-      <motion.div
-        initial={{ opacity: 0, x: -150 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        className="relative flex justify-center md:justify-end w-full md:w-5/12 mb-8 md:mb-0 md:mr-8"
-      >
-        {/* Glowing Gradient Aura */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center"
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.5, 0.9, 0.5],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <div className="w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-r from-indigo-500/30 via-purple-500/40 to-indigo-400/30 blur-3xl" />
-        </motion.div>
+      {/* Background Video */}
+      <video
+        src={heroVideo}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      />
 
-        {/* Profile Image */}
-        <motion.div
-          className="relative rounded-full p-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-400 shadow-xl"
-          animate={{
-            rotate: [0, 1, -1, 0],
-            scale: [1, 1.02, 1],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 6,
-            ease: "easeInOut",
-          }}
-        >
-          <motion.img
-            src={amberPhoto}
-            alt="Amber Shukla"
-            className="rounded-full shadow-2xl border-4 border-indigo-400 object-cover w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96"
-            whileHover={{ scale: 1.05, rotate: 1 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          />
-        </motion.div>
-      </motion.div>
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/65" />
 
-      {/* Right Side - Text and Role Animation */}
-      <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        className="text-center md:text-left w-full md:w-7/12 space-y-6 z-10"
-      >
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
-          Hi, I’m{" "}
-          <span className="text-indigo-500 dark:text-indigo-400">
-            Amber Shukla
+      {/* Content */}
+      <div className="relative container mx-auto max-w-6xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center z-10">
+
+        {/* LEFT — TEXT */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="inline-block mb-6 px-4 py-1 rounded-full text-sm font-medium
+                           bg-indigo-500/10 text-indigo-400">
+            Preparing for Tech Interviews
           </span>
-        </h1>
 
-        {/* Smooth Role Fade Animation */}
-        <div className="h-8 md:h-10 overflow-hidden flex items-center justify-center md:justify-start">
-          <AnimatedRole />
-        </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight text-white">
+            Hi, I’m{" "}
+            <span className="text-indigo-400">
+              Amber Shukla
+            </span>
+          </h1>
 
-        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl">
-          B.Tech CSE student @ SRM University | React & Tailwind enthusiast <br />
-          DSA lover, building clean, scalable, and efficient web apps
-        </p>
+          <p className="mt-6 text-gray-300 max-w-xl leading-relaxed">
+            B.Tech CSE student at SRM University. Focused on
+            Data Structures, Algorithms, and building scalable
+            web applications.
+          </p>
 
-        {/* Buttons */}
-        <div className="pt-4 flex flex-wrap gap-4 justify-center md:justify-start">
-          <motion.a
-            href="#projects"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            whileHover={{ scale: 1.05 }}
-            className="cosmic-button px-6 py-3 rounded-full text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300"
-          >
-            View My Work
-          </motion.a>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              className="px-7 py-3 rounded-full bg-indigo-600 text-white
+                         font-medium hover:bg-indigo-700 transition"
+            >
+              View Projects
+            </a>
 
-          <motion.a
-            href="#contact"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            className="px-6 py-3 rounded-full border border-indigo-500 text-indigo-600 hover:bg-indigo-100 transition-all duration-300"
-          >
-            Contact Me
-          </motion.a>
+            <a
+              href="#contact"
+              className="px-7 py-3 rounded-full border border-white/20
+                         text-white hover:bg-white/10 transition"
+            >
+              Contact
+            </a>
+          </div>
+        </motion.div>
 
-          <motion.a
-            href="/path-to-your-resume.pdf" // <-- replace with your resume link
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            className="px-6 py-3 rounded-full border border-indigo-500 text-indigo-600 hover:bg-indigo-100 transition-all duration-300"
-          >
-            Resume
-          </motion.a>
-        </div>
-      </motion.div>
+        {/* RIGHT — PHOTO */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative flex justify-center"
+        >
+          <div className="absolute w-96 h-96 rounded-full
+                          bg-indigo-500/20 blur-[120px]" />
+
+          <div className="relative rounded-full p-1
+                          bg-gradient-to-br from-indigo-500 to-purple-500">
+            <img
+              src={amberPhoto}
+              alt="Amber Shukla"
+              className="rounded-full object-cover
+                         w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96
+                         border-4 border-background shadow-xl"
+            />
+          </div>
+        </motion.div>
+
+      </div>
     </section>
-  );
-};
-
-/* 🔁 Animated Role Text (Smooth Fade + Slide) */
-const AnimatedRole = () => {
-  const roles = ["Software Developer", "Web Developer"];
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(
-      () => setIndex((prev) => (prev + 1) % roles.length),
-      3000
-    );
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <AnimatePresence mode="wait">
-      <motion.span
-        key={roles[index]}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="text-2xl md:text-3xl font-semibold text-indigo-500 dark:text-indigo-300"
-      >
-        {roles[index]}
-      </motion.span>
-    </AnimatePresence>
   );
 };
