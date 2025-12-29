@@ -1,49 +1,51 @@
-import { ArrowUp } from "lucide-react";
+import instagram from "../assets/social/instagram.svg";
+import linkedin from "../assets/social/linkedin.svg";
+import github from "../assets/social/github.svg";
+import leetcode from "../assets/social/leetcode.svg";
 
 export const Footer = () => {
   return (
-    <footer className="py-12 px-4 bg-card relative border-t border-border mt-12 pt-8 flex flex-wrap justify-between items-center">
-      {/* Copyright Text */}
-      <p className="text-sm text-muted-foreground">
-        &copy; {new Date().getFullYear()} Amber Shukla. All rights reserved.
-      </p>
+    <footer className="w-full bg-gradient-to-r from-[#0b0b0b] via-[#111111] to-[#0b0b0b]">
+      <div className="container mx-auto max-w-6xl px-6 py-10">
 
-      {/* Social Links */}
-      <div className="flex space-x-4">
-        <a
-          href="https://www.linkedin.com/in/shuklamber/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-primary transition-colors text-muted-foreground"
-        >
-          LinkedIn
-        </a>
-        <a
-          href="https://github.com/sshuklaamberr"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-primary transition-colors text-muted-foreground"
-        >
-          GitHub
-        </a>
-        <a
-          href="https://www.instagram.com/shukla_amber_"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-primary transition-colors text-muted-foreground"
-        >
-          Instagram
-        </a>
+        <div className="flex items-center justify-center md:justify-between">
+
+          <div className="hidden md:block w-24" />
+
+          <div className="hidden md:flex gap-6 text-sm text-gray-400">
+            <a href="#about" className="hover:text-white">About</a>
+            <a href="#projects" className="hover:text-white">Projects</a>
+            <a href="#skills" className="hover:text-white">Skills</a>
+            <a href="#contact" className="hover:text-white">Contact</a>
+          </div>
+
+          <div className="flex gap-4 items-center">
+            <a href="https://www.instagram.com/shukla_amber_" target="_blank">
+              <img src={instagram} alt="Instagram" className="w-6 h-6 hover:opacity-80 transition" />
+            </a>
+
+            <a href="https://www.linkedin.com/in/shuklaaamber/" target="_blank">
+              <img src={linkedin} alt="LinkedIn" className="w-6 h-6 hover:opacity-80 transition" />
+            </a>
+
+            <a href="https://github.com/sshuklaamberr" target="_blank">
+              <img src={github} alt="GitHub" className="w-6 h-6 hover:opacity-80 transition" />
+            </a>
+
+            <a href="https://leetcode.com/" target="_blank">
+              <img src={leetcode} alt="LeetCode" className="w-6 h-6 hover:opacity-80 transition" />
+            </a>
+          </div>
+
+        </div>
+
+        <div className="my-8 border-t border-white/10" />
+
+        <p className="text-center text-sm text-gray-500">
+          © {new Date().getFullYear()} All rights reserved
+        </p>
+
       </div>
-
-      {/* Scroll to Top */}
-      <a
-        href="#home"
-        aria-label="Scroll to top"
-        className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
-      >
-        <ArrowUp size={20} />
-      </a>
     </footer>
   );
 };

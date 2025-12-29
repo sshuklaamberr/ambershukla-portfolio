@@ -1,117 +1,136 @@
-import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
+import { motion } from "framer-motion";
 
 const projects = [
   {
-    id: 1,
-    title: "College Placement System",
+    title: "Developer Portfolio",
     description:
-      "A full-stack web application that streamlines the campus placement process, enabling students and recruiters to connect easily.",
+      "A performance-focused personal portfolio built with React, Tailwind CSS, and Framer Motion. Features a dark-only design, animated sections, accessibility-aware interactions, and optimized UI transitions.",
+    image: "/projects/portfolio.png",
+    tags: ["React", "Tailwind CSS", "Framer Motion"],
+    live: "https://ambershukla-portfolio.vercel.app",
+    github: "https://github.com/sshuklaamberr/amber-portfolio",
+  },
+  {
+    title: "Placement Management System",
+    description:
+      "A role-based full-stack placement platform with separate dashboards for students, recruiters, and administrators. Designed with secure authentication, REST APIs, and MongoDB-backed data persistence.",
     image: "/projects/placement.png",
-    tags: ["React", "Node.js", "MongoDB", "Express"],
-    demoUrl: "#",
-    githubUrl: "https://github.com/sshuklaamberr/college-placement-system",
+    tags: ["React", "Node.js", "Express", "MongoDB", "JWT"],
+    live: null,
+    github: null,
   },
   {
-    id: 2,
-    title: "Portfolio Website",
+    title: "Smart Parking Management System",
     description:
-      "My personal portfolio showcasing my skills, projects, and achievements. Designed with TailwindCSS and built using React.",
-    image: "/projects/project2.png",
-    tags: ["React", "TailwindCSS", "Framer Motion"],
-    demoUrl: "https://amber-portfolio.netlify.app",
-    githubUrl: "https://github.com/sshuklaamberr/amber-portfolio",
-  },
-  {
-    id: 3,
-    title: "Parking Management System",
-    description:
-      "A smart parking management application that helps users find, book, and manage parking spaces efficiently.",
+      "A parking management system that handles slot availability, booking logic, and administrative control. Built with a focus on real-world constraints, backend logic, and data consistency.",
     image: "/projects/parking.png",
-    tags: ["HTML", "CSS", "JavaScript", "Firebase"],
-    demoUrl: "#",
-    githubUrl: "https://github.com/sshuklaamberr/parking-management-system",
+    tags: ["React", "Node.js", "Express", "MongoDB"],
+    live: null,
+    github: null,
   },
 ];
 
 export const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Featured <span className="text-primary">Projects</span>
-        </h2>
+    <section id="projects" className="relative py-24 bg-black">
+      <div className="container mx-auto max-w-6xl px-6">
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Here are some of my recent projects — built with creativity, clean
-          code, and performance in mind. Each one represents my growth and love
-          for technology.
+        {/* Heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl md:text-3xl font-medium text-center text-white mb-6"
+        >
+          Featured <span className="text-indigo-400">Projects</span>
+        </motion.h2>
+
+        {/* Subheading */}
+        <p className="text-center text-gray-300 max-w-2xl mx-auto mb-14 text-sm md:text-base">
+          A selection of projects that demonstrate my ability to design,
+          build, and reason about real-world software systems.
         </p>
 
-        {/* Project Cards */}
+        {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <div
-              key={project.id}
-              className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="
+                bg-white/5 border border-white/10
+                rounded-xl overflow-hidden
+                hover:border-indigo-400/40
+                transition
+              "
             >
-              <div className="h-48 overflow-hidden">
+              {/* Image */}
+              <div className="h-44 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover"
                 />
               </div>
 
-              <div className="p-6">
+              {/* Content */}
+              <div className="p-5">
+                {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag, index) => (
+                  {project.tags.map((tag) => (
                     <span
-                      key={index}
-                      className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground"
+                      key={tag}
+                      className="text-xs px-2 py-1 rounded-full
+                                 bg-white/10 text-gray-300"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4">
+                {/* Title */}
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm text-gray-300 leading-relaxed mb-5">
                   {project.description}
                 </p>
 
-                <div className="flex justify-between items-center">
-                  <div className="flex space-x-3">
+                {/* Links */}
+                <div className="flex gap-4">
+                  {project.live && (
                     <a
-                      href={project.demoUrl}
+                      href={project.live}
                       target="_blank"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                      rel="noopener noreferrer"
+                      className="text-indigo-400 hover:text-indigo-300 transition"
                     >
-                      <ExternalLink size={20} />
+                      <ExternalLink size={18} />
                     </a>
+                  )}
+                  {project.github && (
                     <a
-                      href={project.githubUrl}
+                      href={project.github}
                       target="_blank"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                      rel="noopener noreferrer"
+                      className="text-gray-300 hover:text-white transition"
                     >
-                      <Github size={20} />
+                      <Github size={18} />
                     </a>
-                  </div>
+                  )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* GitHub Button */}
-        <div className="text-center mt-12">
-          <a
-            className="cosmic-button w-fit flex items-center mx-auto gap-2"
-            target="_blank"
-            href="https://github.com/sshuklaamberr"
-          >
-            Check My GitHub <ArrowRight size={16} />
-          </a>
-        </div>
       </div>
     </section>
   );
